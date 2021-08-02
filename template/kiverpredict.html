@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<title>About Page</title>
+</head>
+<style>
+	 #main-footer
+    {
+      color: #FFFFFF;
+      font-family: "Segoe UI";
+      background: #2B2B2B;
+      text-align: center;
+      margin-top: 75px;
+      padding: 16px;
+      bottom: 8px;
+    }
+
+    .img_holder img{
+        max-width: 100%; max-height: 100%;
+    }
+
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
+<body>
+
+	<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Multi Diasease Daignosis</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+          <a class="nav-item nav-link" href="/cancerpred">Cancer</a>
+          <a class="nav-item nav-link" href="/dia">Diabetes</a>
+          <a class="nav-item nav-link" href="/heartpred">Heart</a>
+          <a class="nav-item nav-link" href="/liverpred">Liver</a>
+          <a class="nav-item nav-link" href="/kidneypred">Kidney</a>
+           <a class="nav-item nav-link" href="/Malaria">Malaria</a>
+          <!-- <a class="nav-item nav-link" href="/Pneumonia">Pneumonia</a> -->
+        </div>
+        <!-- Navbar Right Side
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Register<
+      </div>-->
+
+    </div>
+  </nav>
+             <center>
+    <img src="{{url_for('static',filename='bvp.png')}}"></img>
+
+
+    <b><u>
+        <h3>Bharati Vidyapeeth College Of Engineering</h3><br>
+        <h3>B.tech Final Year Project</h3><br>
+        <div class="container">
+        <h2 class='container-heading'><span class="heading_font">Liver Disease Prediction</span></h2>
+    </div>
+    </b></u></center>
+</header>
+
+    <div class="container">
+        <form action="{{ url_for('predict3') }}" method="POST">
+            <br>
+            <label for="Age">Age: </label>
+            <input id="Age" name="Age" placeholder="in Year" required="required">
+            <br>
+            <label for="Gender">Genger: </label>
+            <input id="Gender" name="Gender" placeholder="Male = 1, Female=0" required="required">
+            <br>
+            <label for="Total Bilirubin">Total Bilirubin: </label>
+            <input id="Total Bilirubin" name="Total_Bilirubin" placeholder="Total Bilirubin" required="required">
+            <br>
+            <label for="Direct_Bilirubin">Direct_Bilirubin: </label>
+            <input id="Direct_Bilirubin" name="Direct_Bilirubin" placeholder="Direct Bilirubin" required="required">
+            <br>
+            <label for="Alkaline Phosphotase">Alkaline Phosphotase: </label>
+            <input id="Alkaline Phosphotase" name="Alkaline_Phosphotase" placeholder="Alkaline Phosphotase" required="required">
+            <br>
+            <label for="Alamine Aminotransferase">Alamine_Aminotransferase: </label>
+            <input id="Alamine Aminotransferase" name="Alamine_Aminotransferase" placeholder="Alamine Aminotransferase" required="required">
+            <br>
+            <label for="Aspartate Aminotransferase">Aspartate Aminotransferase: </label>
+            <input id="Aspartate Aminotransferase" name="Aspartate_Aminotransferase" placeholder="Aspartate Aminotransferase" required="required">
+            <br>
+            <label for="Total Protiens">Total Protiens: </label>
+            <input id="Total Protiens" name="Total_Protiens" placeholder="Total Protiens" required="required">
+            <br>
+            <label for="Albumin">Albumin: </label>
+            <input id="Albumin" name="Albumin" placeholder="Albumin" required="required">
+            <br>
+            <label for="Albumin and Globulin Ratio">Albumin and Globulin Ratio: </label>
+            <input id="Albumin and Globulin Ratio" name="Albumin_and_Globulin_Ratio" placeholder="Albumin and Globulin Ratio" required="required">
+            <br>
+            <br>
+            <br>
+            <button id="sub" type="submit ">Submit</button>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+        </form>
+
+<div class="results">
+			{% if prediction==2 %}
+				<h3><span class='danger'>It seems you have a Kidney Disease. Please consult a Doctor!</span></h3>
+
+			{% elif prediction==1 %}
+				<h3><span class='safe'>It seems you are fine. You don't have a Kidney Disease.</span></h3>
+
+			{% endif %}
+		</div>
+    </div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>
+
+
